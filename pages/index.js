@@ -32,7 +32,7 @@ export default function Home() {
           Random Color Generator
         </h1>
         <p className="button">
-        <button onClick={() => changeColor(1)} id="button">Generate Color</button>
+        <button onClick={() => changeColor()} id="button">Generate Color</button>
         </p>
       </main>
 
@@ -72,27 +72,12 @@ export default function Home() {
           align-items: center;
         }
 
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-
-        .title a:hover,
-        .title a:focus,
-        .title a:active {
-          text-decoration: underline;
-        }
-
         .title {
           margin: 0;
           line-height: 1.15;
           font-size: 4rem;
         }
 
-        .title,
-        .description {
-          text-align: center;
-        }
 
         button {
           background: none;
