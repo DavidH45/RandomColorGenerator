@@ -23,13 +23,20 @@ export default function Home() {
     const footer = document.getElementById('footer');
     footer.style.color = darkColor;
 
+    // Change page title
+    document.title = "#"+randomColor;
+
+    // Change page favicon
+    const favicon = document.getElementById('favicon');
+    favicon.href = "https://singlecolorimage.com/get/"+randomColor+"/1x1";
+
   }
   
   return (
     <div className="container">
       <Head>
         <title>Random Color Generator</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link id="favicon" rel="icon" href="https://singlecolorimage.com/get/ffffff/1x1" />
       </Head>
 
       <main>
@@ -84,7 +91,6 @@ export default function Home() {
           line-height: 1.15;
           font-size: 4rem;
         }
-
 
         button {
           background: none;

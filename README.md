@@ -8,6 +8,6 @@ Project uses tinycolor2 to darken hex colors.
 # Todo
 > These are just a few things I would like to experiment with and try and add.
 - [x] Change title color on new color.
-- [ ] Update favicon to new color.
+- [x] Update favicon to new color.
 - [ ] Maybe some cool animations?
 - [ ] Click to copy hex color on title.
