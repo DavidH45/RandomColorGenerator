@@ -98,7 +98,8 @@ export default function Home() {
           font-weight: 700;
           position: relative;
           vertical-align: middle;
-          cursor: pointer
+          cursor: pointer;
+          border-radius: 5px;
         }
       `}</style>
 
