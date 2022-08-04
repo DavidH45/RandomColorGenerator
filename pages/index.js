@@ -49,7 +49,7 @@ export default function Home() {
       </main>
 
       <footer>
-        <a id="footer">Created by David Hendershot</a>
+        <a id="footer" href="https://github.com/DavidH45">Created by David Hendershot</a>
       </footer>
       <style jsx>{`
         .container {
@@ -84,6 +84,7 @@ export default function Home() {
           justify-content: center;
           align-items: center;
           line-height: 1.15;
+          color: #000;
         }
 
         .title {
@@ -107,6 +108,11 @@ export default function Home() {
           cursor: pointer;
           border-radius: 5px;
         }
+
+        a:link { text-decoration: none; }
+        a:visited { text-decoration: none; }
+        a:hover { text-decoration: none; }
+        a:active { text-decoration: none; }
       `}</style>
 
       <style jsx global>{`
