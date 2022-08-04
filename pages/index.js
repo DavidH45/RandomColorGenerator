@@ -4,20 +4,25 @@ var tinycolor = require("tinycolor2");
 export default function Home() {
 
   function changeColor() {
+    // Change background color
     const randomColor = Math.floor(Math.random()*16777215).toString(16);
     const darkColor = tinycolor("#"+randomColor).darken(35).toString();
     document.body.style.backgroundColor = "#"+randomColor;
 
+    // Change title text and title color
     const title = document.getElementById('title');
     document.getElementById("title").innerHTML = "#"+randomColor;
     title.style.color = darkColor;
 
+    // Change button shadow and color
     const button = document.getElementById('button');
     button.style.boxShadow = "inset 0 0 0 2px "+darkColor;
     button.style.color = darkColor;
 
-    console.log("Color="+randomColor);
-    console.log("DarkColor="+darkColor);
+    // Change title text and title color
+    const footer = document.getElementById('footer');
+    footer.style.color = darkColor;
+
   }
   
   return (
@@ -37,7 +42,7 @@ export default function Home() {
       </main>
 
       <footer>
-        <a>Created by David Hendershot</a>
+        <a id="footer">Created by David Hendershot</a>
       </footer>
       <style jsx>{`
         .container {
@@ -64,12 +69,14 @@ export default function Home() {
           display: flex;
           justify-content: center;
           align-items: center;
+          font-weight: 600;
         }
 
         footer a {
           display: flex;
           justify-content: center;
           align-items: center;
+          line-height: 1.15;
         }
 
         .title {
