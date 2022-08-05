@@ -31,6 +31,17 @@ export default function Home() {
     favicon.href = "https://singlecolorimage.com/get/"+randomColor+"/1x1";
 
   }
+
+  function copy() {
+    var copyColor = document.getElementById("title");
+    if(copyColor.innerHTML.toString() == "Random Color Generator"){
+      alert("Press the generate color button first.");
+    }else{
+    navigator.clipboard.writeText(copyColor.innerHTML.toString());
+    alert("Copied the color: " + copyColor.innerHTML.toString());
+    }
+  }
+
   
   return (
     <div className="container">
@@ -40,7 +51,7 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1 className="title" id="title">
+        <h1 className="title" id="title" onClick={() => copy()} >
           Random Color Generator
         </h1>
         <p className="button">
