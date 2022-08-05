@@ -11,3 +11,4 @@ Project uses tinycolor2 to darken hex colors.
 - [x] Update favicon to new color.
 - [ ] Maybe some cool animations?
 - [x] Click to copy hex color on title.
+- [ ] Maybe use opacity to make darken hex colors instead of using tinycolor2.
