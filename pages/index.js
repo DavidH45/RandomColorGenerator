@@ -61,7 +61,7 @@ export default function Home() {
           Random Color Generator
         </h1>
         <p className="button">
-        <button onClick={() => changeColor()} id="button">Generate Color--</button>
+        <button onClick={() => changeColor()} id="button">Generate Color</button>
         </p>
       </main>
 
