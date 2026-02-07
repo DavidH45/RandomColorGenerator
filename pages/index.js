@@ -1,13 +1,18 @@
 import Head from 'next/head'
+import { useRef } from 'react';
 var tinycolor = require("tinycolor2");
 
 export default function Home() {
+  const toastTimer = useRef(null);
 
   function changeColor() {
     // Change background color
     const randomColor = Math.floor(Math.random()*16777215).toString(16);
     const darkColor = tinycolor("#"+randomColor).darken(35).toString();
     document.body.style.backgroundColor = "#"+randomColor;
+
+    // Set theme color variable for tooltip/toast
+    document.documentElement.style.setProperty('--theme-color', darkColor);
 
     // Change title text and title color
     const title = document.getElementById('title');
@@ -41,11 +46,39 @@ export default function Home() {
   function copy() {
     var copyColor = document.getElementById("title");
     if(copyColor.innerHTML.toString() == "Random Color Generator"){
-      alert("Press the generate color button first.");
+      showToast("Generate a color first!");
     }else{
     navigator.clipboard.writeText(copyColor.innerHTML.toString());
-    alert("Copied the color: " + copyColor.innerHTML.toString());
+    showToast("Copied: " + copyColor.innerHTML.toString());
     }
+  }
+
+  function showToast(message) {
+    var toast = document.getElementById("toast");
+    var title = document.getElementById("title");
+    
+    // Clear existing timer
+    if (toastTimer.current) {
+      clearTimeout(toastTimer.current);
+    }
+
+    if(title.style.color) {
+      toast.style.backgroundColor = title.style.color;
+    }
+    
+    toast.innerHTML = message;
+    
+    // Reset animation if already showing to give feedback
+    if (toast.classList.contains("show")) {
+      toast.classList.remove("show");
+      void toast.offsetWidth; // Trigger reflow
+    }
+    
+    toast.classList.add("show");
+    
+    toastTimer.current = setTimeout(function(){ 
+      toast.classList.remove("show"); 
+    }, 3000);
   }
 
   
@@ -57,9 +90,14 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1 className="title" id="title" onClick={() => copy()} >
-          Random Color Generator
-        </h1>
+        <div className="title-container">
+          <h1 className="title" id="title" onClick={() => copy()} >
+            Random Color Generator
+          </h1>
+          <span className="tooltip">Click to copy</span>
+        </div>
+        <div id="toast" className="toast"></div>
+
         <p className="button">
         <button onClick={() => changeColor()} id="button">Generate Color</button>
         </p>
@@ -110,6 +148,73 @@ export default function Home() {
           line-height: 1.15;
           font-size: 4rem;
           transition: color 0.5s ease;
+          cursor: pointer;
+        }
+
+        .title-container {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .tooltip {
+          visibility: hidden;
+          width: 120px;
+          background-color: var(--theme-color, #555);
+          color: #fff;
+          text-align: center;
+          padding: 5px 0;
+          border-radius: 6px;
+          position: absolute;
+          z-index: 1;
+          bottom: 100%;
+          left: 50%;
+          margin-left: -60px;
+          opacity: 0;
+          transition: opacity 0.3s;
+          pointer-events: none;
+        }
+
+        .tooltip::after {
+          content: "";
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          margin-left: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: var(--theme-color, #555) transparent transparent transparent;
+        }
+
+        .title-container:hover .tooltip {
+          visibility: visible;
+          opacity: 1;
+        }
+
+        .toast {
+          visibility: hidden;
+          opacity: 0;
+          min-width: 250px;
+          transform: translateX(-50%);
+          background-color: #333;
+          color: #fff;
+          text-align: center;
+          padding: 16px;
+          position: fixed;
+          z-index: 1000;
+          left: 50%;
+          top: 0;
+          font-size: 17px;
+          border-radius: 10px;
+          box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+          transition: all 0.5s ease-in-out;
+        }
+
+        .toast.show {
+          visibility: visible;
+          opacity: 1;
+          top: 30px;
         }
 
         button {
