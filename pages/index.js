@@ -11,6 +11,12 @@ export default function Home() {
 
     // Change title text and title color
     const title = document.getElementById('title');
+    
+    // Animate title
+    title.classList.remove('pop-animation');
+    void title.offsetWidth; // Trigger reflow
+    title.classList.add('pop-animation');
+
     document.getElementById("title").innerHTML = "#"+randomColor;
     title.style.color = darkColor;
 
@@ -96,12 +102,14 @@ export default function Home() {
           align-items: center;
           line-height: 1.15;
           color: #000;
+          transition: color 0.5s ease;
         }
 
         .title {
           margin: 0;
           line-height: 1.15;
           font-size: 4rem;
+          transition: color 0.5s ease;
         }
 
         button {
@@ -118,6 +126,11 @@ export default function Home() {
           vertical-align: middle;
           cursor: pointer;
           border-radius: 5px;
+          transition: color 0.5s ease, box-shadow 0.5s ease, transform 0.1s ease;
+        }
+
+        button:active {
+          transform: scale(0.95);
         }
 
         a:link { text-decoration: none; }
@@ -134,6 +147,16 @@ export default function Home() {
           font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
             Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
             sans-serif;
+          transition: background-color 0.5s ease;
+        }
+
+        .pop-animation {
+          animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes pop {
+          0% { transform: scale(0.5); opacity: 0; }
+          100% { transform: scale(1); opacity: 1; }
         }
 
         * {
